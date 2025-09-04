@@ -1,58 +1,74 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
-All colors MUST be HSL.
-*/
+/* Environmental Education Platform Design System */
 
 @layer base {
   :root {
+    /* Base colors */
     --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
+    --foreground: 219 14% 14%;
 
+    /* Primary - Emerald for CTAs and main actions */
+    --primary: 158 64% 40%; /* Emerald 600 #059669 */
+    --primary-foreground: 0 0% 100%;
+    --primary-light: 151 81% 96%; /* Emerald 50 #ECFDF5 */
+
+    /* Secondary - Indigo for navigation and secondary actions */
+    --secondary: 243 75% 59%; /* Indigo 600 #4F46E5 */
+    --secondary-foreground: 0 0% 100%;
+    --secondary-light: 244 58% 97%; /* Indigo 50 #EEF2FF */
+
+    /* Accent colors for gamification */
+    --accent-amber: 43 96% 56%; /* Amber 500 #F59E0B for coins */
+    --accent-sky: 199 89% 48%; /* Sky 500 #0EA5E9 for info */
+    --accent-purple: 262 83% 58%; /* Purple 600 #7C3AED for achievements */
+    
+    /* UI colors */
     --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
+    --card-foreground: 219 14% 14%;
+    --border: 220 13% 91%;
+    --input: 220 13% 91%;
+    --ring: 158 64% 40%;
+    --muted: 210 40% 96%;
+    --muted-foreground: 215 16% 47%;
+    
+    /* Destructive */
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 100%;
 
+    /* Popover */
     --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
+    --popover-foreground: 219 14% 14%;
 
-    --primary: 222.2 47.4% 11.2%;
-    --primary-foreground: 210 40% 98%;
+    /* Sidebar */
+    --sidebar-background: 151 81% 96%;
+    --sidebar-foreground: 219 14% 14%;
+    --sidebar-primary: 158 64% 40%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 151 60% 93%;
+    --sidebar-accent-foreground: 219 14% 14%;
+    --sidebar-border: 151 40% 85%;
+    --sidebar-ring: 158 64% 40%;
 
-    --secondary: 210 40% 96.1%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
+    /* Design system tokens */
+    --radius-sm: 0.5rem;
+    --radius-md: 0.75rem;
+    --radius-lg: 1rem;
+    --radius-xl: 1rem;
 
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
+    /* Shadows */
+    --shadow-sm: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
+    --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+    --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
 
-    --accent: 210 40% 96.1%;
-    --accent-foreground: 222.2 47.4% 11.2%;
-
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 40% 98%;
-
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 222.2 84% 4.9%;
-
-    --radius: 0.5rem;
-
-    --sidebar-background: 0 0% 98%;
-
-    --sidebar-foreground: 240 5.3% 26.1%;
-
-    --sidebar-primary: 240 5.9% 10%;
-
-    --sidebar-primary-foreground: 0 0% 98%;
-
-    --sidebar-accent: 240 4.8% 95.9%;
-
-    --sidebar-accent-foreground: 240 5.9% 10%;
-
-    --sidebar-border: 220 13% 91%;
-
-    --sidebar-ring: 217.2 91.2% 59.8%;
+    /* Gamification gradients */
+    --gradient-points: linear-gradient(135deg, hsl(var(--accent-amber)), hsl(var(--primary)));
+    --gradient-hero: linear-gradient(135deg, hsl(var(--primary)), hsl(var(--secondary)));
+    --gradient-badge: linear-gradient(135deg, hsl(var(--accent-purple)), hsl(var(--accent-sky)));
   }
 
   .dark {
@@ -100,6 +116,73 @@ All colors MUST be HSL.
   }
 
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background text-foreground font-inter;
+  }
+}
+
+@layer components {
+  /* Progress Ring Component */
+  .progress-ring {
+    @apply relative w-20 h-20;
+  }
+  
+  .progress-ring circle {
+    transition: stroke-dasharray 0.3s ease-in-out;
+  }
+
+  /* Gamification Cards */
+  .game-card {
+    @apply bg-card border border-border rounded-xl p-6 shadow-sm hover:shadow-md transition-all duration-300;
+  }
+
+  .game-card-hero {
+    @apply bg-gradient-to-br from-primary to-secondary text-white rounded-xl p-6 shadow-lg;
+  }
+
+  .points-card {
+    @apply bg-gradient-to-br from-amber-50 to-amber-100 border border-amber-200 rounded-xl p-4;
+  }
+
+  .coins-card {
+    @apply bg-gradient-to-br from-yellow-50 to-yellow-100 border border-yellow-200 rounded-xl p-4;
+  }
+
+  .badges-card {
+    @apply bg-gradient-to-br from-purple-50 to-purple-100 border border-purple-200 rounded-xl p-4;
+  }
+
+  /* Interactive Elements */
+  .hover-lift {
+    @apply transition-transform duration-200 hover:scale-105;
+  }
+
+  .hover-grow {
+    @apply transition-transform duration-200 hover:scale-110;
+  }
+
+  /* Badge Styles */
+  .badge-bronze {
+    @apply bg-gradient-to-r from-amber-600 to-amber-500 text-white;
+  }
+
+  .badge-silver {
+    @apply bg-gradient-to-r from-gray-500 to-gray-400 text-white;
+  }
+
+  .badge-gold {
+    @apply bg-gradient-to-r from-yellow-500 to-yellow-400 text-white;
+  }
+
+  /* Status Indicators */
+  .status-verified {
+    @apply bg-emerald-100 text-emerald-800 border border-emerald-200;
+  }
+
+  .status-pending {
+    @apply bg-amber-100 text-amber-800 border border-amber-200;
+  }
+
+  .status-rejected {
+    @apply bg-red-100 text-red-800 border border-red-200;
   }
 }
