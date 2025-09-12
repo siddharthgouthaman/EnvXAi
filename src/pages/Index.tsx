@@ -3,6 +3,7 @@ import { HeroSection } from "@/components/dashboard/HeroSection";
 import { NextUpCard } from "@/components/dashboard/NextUpCard";
 import { QuickActions } from "@/components/dashboard/QuickActions";
 import { FeedCards } from "@/components/dashboard/FeedCards";
+import { Leaderboard } from "@/components/dashboard/Leaderboard";
 
 const Index = () => {
   return (
@@ -12,6 +13,7 @@ const Index = () => {
         <NextUpCard />
         <QuickActions />
         <FeedCards />
+        <Leaderboard />
       </div>
     </Layout>
   );

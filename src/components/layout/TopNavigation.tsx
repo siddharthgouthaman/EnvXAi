@@ -3,9 +3,15 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
 import { SidebarTrigger } from "@/components/ui/sidebar";
+import { ProfileStats } from "@/components/dashboard/ProfileStats";
+import { useState } from "react";
 
 export const TopNavigation = () => {
+  const [isProfileOpen, setIsProfileOpen] = useState(false);
+
   return (
+    <>
+      <ProfileStats open={isProfileOpen} onOpenChange={setIsProfileOpen} />
     <header className="h-16 border-b bg-white flex items-center justify-between px-6">
       <div className="flex items-center gap-4">
         <SidebarTrigger />
@@ -23,15 +29,20 @@ export const TopNavigation = () => {
           Student
         </Badge>
         
+        <Badge variant="outline" className="font-medium text-xs">
+          Grade 8
+        </Badge>
+        
         <Button variant="ghost" size="sm" className="relative">
           <Bell className="h-5 w-5" />
           <span className="absolute -top-1 -right-1 h-3 w-3 bg-primary rounded-full"></span>
         </Button>
         
-        <Button variant="ghost" size="sm">
+        <Button variant="ghost" size="sm" onClick={() => setIsProfileOpen(true)}>
           <User className="h-5 w-5" />
         </Button>
       </div>
     </header>
+    </>
   );
 };
